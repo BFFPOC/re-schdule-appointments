@@ -1,5 +1,4 @@
 const rp = require('request-promise');
-const fetch = require('node-fetch');
 const rescheduleAppointment = (req, res, next) => {
   if (checkingForValidParams(req)) {
     var options = {
