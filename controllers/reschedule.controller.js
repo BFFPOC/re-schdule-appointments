@@ -22,9 +22,10 @@ const rescheduleAppointment = (req, res, next) => {
         res.send(response)
       })
       .catch(function (err) {
+
         var errorObject = {
           "statusCode": err.statusCode,
-          "Message": err.error.message
+          "Message": err.error.message ? err.error.message : "Some error occured with the service"
         }
         res.send(errorObject);
 
