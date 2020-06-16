@@ -20,13 +20,22 @@ exports.cancelAppt = function (req, res) {
         }
     ).then(function(response) {
         //console.log(response.data);
-        res.send(response.data);
+        var successObject = {
+            "statusCode": 200,
+            "Message":  "Cancelled "
+          }
+          res.send(successObject)
     }).catch(err => {
-        //console.log(err.response);
-        if(!err.response) {
-            res.send("Server is busy! Retry after Sometime.");
-            return;
-        }
-        res.send(err.response && err.response.data);
+        // if(!err.response) {
+        //     res.send("Server is busy! Retry after Sometime.");
+        //     return;
+        // }
+        // res.send(err.response && err.response.data);
+
+        var errorObject = {
+            "statusCode": 404,
+            "Message": err.response.data.message? err.response.data.message : "Some error occured with the service"
+          }
+          res.send(errorObject);
     })
 };

@@ -18,8 +18,11 @@ const rescheduleAppointment = (req, res, next) => {
     };
     rp(options)
       .then(function (response) {
-
-        res.send(response)
+        var successObject = {
+          "statusCode": 200,
+          "Message":  "Rescheduled "
+        }
+        res.send(successObject)
       })
       .catch(function (err) {
 
