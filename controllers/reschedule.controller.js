@@ -1,6 +1,12 @@
 const rp = require('request-promise');
+var jwt = require('jsonwebtoken');
 const rescheduleAppointment = (req, res, next) => {
+
   if (checkingForValidParams(req)) {
+    var tokenkey = req.headers.authorization;
+    var  token = GenarateToken(
+        tokenkey,
+        req.body.memberId);
     var options = {
       method: 'PUT',
       url: 'https://appointmentserviceapp-1591774967422.azurewebsites.net/reschedule',
@@ -9,8 +15,9 @@ const rescheduleAppointment = (req, res, next) => {
         "X-correlationid": req.get('X-correlationId')
       },
       body: {
+      
         "id": req.body.id,
-        "token": req.headers.authorization,
+        "token": token,
         "appointmentSlot": req.body.appointmentSlot
 
       },
@@ -52,6 +59,16 @@ const checkingForValidParams = (req) => {
   } else {
     return false
   }
+}
+
+const GenarateToken = function (key, memberId) {
+
+  let genaratedToken = jwt.sign({
+      token: key
+  }, memberId.toString());
+
+  return genaratedToken;
+
 }
 
 
