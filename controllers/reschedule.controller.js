@@ -20,7 +20,7 @@ const rescheduleAppointment = (req, res, next) => {
       .then(function (response) {
         var successObject = {
           "statusCode": 200,
-          "Message":  "Rescheduled "
+          "Message": "Rescheduled "
         }
         res.send(successObject)
       })

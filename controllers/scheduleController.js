@@ -5,14 +5,25 @@ const scheduleAppointments = function (req, res) {
         let options = buildOptions(req)
         rp(options)
             .then(function (parsedBody) {
-                res.send(parsedBody);
+                var successObject = {
+                    "statusCode": 200,
+                    "Message": "Scheduled"
+                }
+                res.send(successObject)
             })
             .catch(function (err) {
-                res.status(err.statusCode);
-                res.send(err);
+                var errorObject = {
+                    "statusCode": err.statusCode,
+                    "Message": err.error.message ? err.error.message : "Some error occured with the service"
+                }
+                res.send(errorObject);
             });
     } else {
-        res.status(400).send('invalid data input');
+        var errorObject = {
+            "statusCode": 400,
+            "Message": "Invald Input"
+        }
+        res.send(errorObject);
     }
 };
 
