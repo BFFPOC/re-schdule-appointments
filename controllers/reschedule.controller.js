@@ -7,6 +7,7 @@ const rescheduleAppointment = (req, res, next) => {
     var  token = GenarateToken(
         tokenkey,
         req.body.memberId);
+        console.log("Encrypted token: ",token);
     var options = {
       method: 'PUT',
       url: 'https://appointmentserviceapp-1591774967422.azurewebsites.net/reschedule',
