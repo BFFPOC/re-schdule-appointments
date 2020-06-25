@@ -7,7 +7,6 @@ router = express.Router();
 
 router.get('/Appointment/:id', getAppointments.getAppointments);
 router.put('/Appointment', rescheduleConroller.rescheduleAppointment);
-router.post('/Appointment', require('./controllers/scheduleController'));
 router.put('/cancelAppointment', cancelController.cancelAppt);
 
 module.exports = router;
